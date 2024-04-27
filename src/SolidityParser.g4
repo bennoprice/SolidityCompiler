@@ -3,7 +3,7 @@ parser grammar SolidityParser;
 options { tokenVocab = SolidityLexer; }
 
 program 
-	: contract EOF
+	: VERSION contract EOF
 	;
 
 contract

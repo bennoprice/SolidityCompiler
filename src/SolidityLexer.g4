@@ -23,6 +23,10 @@ LESS_EQ_OPERATOR    : '<=';
 EQ_OPERATOR         : '=' ;
 NOT_OPERATOR        : '!';
 
+/* Directives */
+
+VERSION     : 'pragma solidity' .*? ';';
+
 /* Keywords */
 
 CONTRACT    : 'contract';
