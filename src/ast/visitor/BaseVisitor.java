@@ -98,6 +98,11 @@ public class BaseVisitor<R,D> implements TreeVisitor<R,D> {
         return base(node, data);
     }
 
+    public R visit(CastNode node, D data) {
+        visit((Tree) node.getExpr(), data);
+        return base(node, data);
+    }
+
     public R visit(DispatchNode node, D data) {
         visit(node.getActuals(), data);
         return base(node, data);

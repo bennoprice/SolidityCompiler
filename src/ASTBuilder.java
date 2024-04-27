@@ -103,19 +103,31 @@ public class ASTBuilder extends SolidityParserBaseVisitor<Tree> {
 
     @Override
     public Tree visitDispatch(SolidityParser.DispatchContext ctx) {
-        String name = ctx.objectId.getText();
+        Symbol name = StringTable.idtable.addString(ctx.objectId.getText());
 
-        var args = new ArrayList<ExpressionNode>();
-        if (ctx.args() != null) {
-            for (var arg : ctx.args().expr())
-                args.add((ExpressionNode) visit(arg));
+        if (TreeConstants.isPrimitive(name)) {
+            // cast expression
+            var expr = (ExpressionNode)visit(ctx.args().expr(0));
+            return new CastNode(
+                    getLineNumber(ctx),
+                    name,
+                    expr
+            );
         }
+        else {
+            // dispatch expression
+            var args = new ArrayList<ExpressionNode>();
+            if (ctx.args() != null) {
+                for (var arg : ctx.args().expr())
+                    args.add((ExpressionNode) visit(arg));
+            }
 
-        return new DispatchNode(
-                getLineNumber(ctx),
-                StringTable.idtable.addString(name),
-                args
-        );
+            return new DispatchNode(
+                    getLineNumber(ctx),
+                    name,
+                    args
+            );
+        }
     }
 
     @Override

@@ -33,6 +33,8 @@ public interface TreeVisitor<R,D> {
 
     R visit(TernaryNode node, D data);
 
+    R visit(CastNode node, D data);
+
     R visit(DispatchNode node, D data);
 
     R visit(BinopNode node, D data);

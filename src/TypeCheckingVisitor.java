@@ -37,10 +37,6 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
         return error("Expected '" + expected + "' but received '" + received + "'", node);
     }
 
-    private boolean isInteger(Symbol type) {
-        return type == TreeConstants.uint256 || type == TreeConstants.uint8;
-    }
-
     @Override
     public Symbol visit(AttributeNode node, TypeEnv ctx) {
         var type = node.getType_decl();
@@ -51,7 +47,7 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
 
     @Override
     public Symbol visit(MethodNode node, TypeEnv ctx) {
-        ctx = new TypeEnv(node, Semant.attributes);
+        ctx = new TypeEnv(node, Semant.attributes.nextScope());
 
         int arg = 1;
         for (var formal : node.getFormals()) {
@@ -142,6 +138,19 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
     }
 
     @Override
+    public Symbol visit(CastNode node, TypeEnv ctx) {
+        var type = visit(node.getExpr(), ctx);
+        var target = node.getType_decl();
+
+        // this is a little hacky since it ignores down casting and is purely semantic
+        if (!TreeConstants.isInteger(type) || !TreeConstants.isInteger(target))
+            return error("Can only cast integer types", node);
+
+        node.setType(target);
+        return target;
+    }
+
+    @Override
     public Symbol visit(DispatchNode node, TypeEnv ctx) {
         var method = Semant.methods.get(node.getName());
         if (method == null)
@@ -171,11 +180,11 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
     @Override
     public Symbol visit(IntBinopNode node, TypeEnv ctx) {
         var lhs = visit(node.getE1(), ctx);
-        if (!isInteger(lhs))
+        if (!TreeConstants.isInteger(lhs))
             return error("LHS of expression must be integer", node);
 
         var rhs = visit(node.getE2(), ctx);
-        if (!isInteger(rhs))
+        if (!TreeConstants.isInteger(rhs))
             return error("RHS of expression must be integer", node);
 
         node.setType(TreeConstants.uint256);
