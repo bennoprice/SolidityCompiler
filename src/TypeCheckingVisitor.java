@@ -126,6 +126,22 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
     }
 
     @Override
+    public Symbol visit(TernaryNode node, TypeEnv ctx) {
+        var condType = visit(node.getCond(), ctx);
+        if (condType != TreeConstants.bool)
+            return error("Ternary condition must evaluate to type 'bool'", node);
+
+        var e1 = visit(node.getE1(), ctx);
+        var e2 = visit(node.getE2(), ctx);
+
+        if (e1 != e2)
+            return errorTypeMismatch(e1, e2, node);
+
+        node.setType(e1);
+        return e1;
+    }
+
+    @Override
     public Symbol visit(DispatchNode node, TypeEnv ctx) {
         var method = Semant.methods.get(node.getName());
         if (method == null)

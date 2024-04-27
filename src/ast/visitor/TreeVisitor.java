@@ -31,6 +31,8 @@ public interface TreeVisitor<R,D> {
 
     R visit(ReturnNode node, D data);
 
+    R visit(TernaryNode node, D data);
+
     R visit(DispatchNode node, D data);
 
     R visit(BinopNode node, D data);

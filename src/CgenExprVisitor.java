@@ -148,6 +148,27 @@ public class CgenExprVisitor extends BaseVisitor<Object, CgenEnv> {
     }
 
     @Override
+    public Object visit(TernaryNode node, CgenEnv ctx) {
+        visit(node.getCond(), ctx);
+
+        var elseLabel = Cgen.asm.getLabel();
+        var endLabel = Cgen.asm.getLabel();
+
+        Cgen.asm.ISZERO();
+        Cgen.asm.JUMPI(elseLabel);
+        ctx.pop();
+        visit(node.getE1(), ctx);
+        ctx.pop(); // little hacky, this avoids both e1 & e2 both pushing to virtual stack
+        Cgen.asm.JUMP(endLabel);
+
+        Cgen.asm.JUMPDEST(elseLabel);
+        visit(node.getE2(), ctx);
+        Cgen.asm.JUMPDEST(endLabel);
+
+        return null;
+    }
+
+    @Override
     public Object visit(ObjectNode node, CgenEnv ctx) {
         var name = node.getName();
 

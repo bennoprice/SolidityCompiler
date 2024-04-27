@@ -59,6 +59,7 @@ expr
     | expr op=(PLUS_OPERATOR | MINUS_OPERATOR) expr                 # AddSubtract
     | expr op=(LESS_EQ_OPERATOR | LESS_OPERATOR | EQ_OPERATOR) expr # LessEqual // does this go here?
     | NOT_OPERATOR expr                                             # Negate
+    | expr QUESTION expr COLON expr                                 # Ternary
     | objectId=IDENTIFIER EQ_OPERATOR expr                          # Assignment
     | typeId=IDENTIFIER objectId=IDENTIFIER EQ_OPERATOR expr        # Declaration
     | PARENT_OPEN expr PARENT_CLOSE                                 # Brackets

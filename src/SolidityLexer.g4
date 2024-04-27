@@ -5,6 +5,8 @@ lexer grammar SolidityLexer;
 PERIOD      : '.';
 COMMA       : ',';
 SEMICOLON   : ';';
+COLON       : ':';
+QUESTION    : '?';
 
 CURLY_OPEN      : '{';
 CURLY_CLOSE     : '}';

@@ -76,6 +76,20 @@ public class ASTBuilder extends SolidityParserBaseVisitor<Tree> {
     }
 
     @Override
+    public Tree visitTernary(SolidityParser.TernaryContext ctx) {
+        var cond = (ExpressionNode)visit(ctx.expr(0));
+        var e1 = (ExpressionNode)visit(ctx.expr(1));
+        var e2 = (ExpressionNode)visit(ctx.expr(2));
+
+        return new TernaryNode(
+                getLineNumber(ctx),
+                cond,
+                e1,
+                e2
+        );
+    }
+
+    @Override
     public Tree visitFormal(SolidityParser.FormalContext ctx) {
         String name = ctx.objectId.getText();
         String type = ctx.typeId.getText();
