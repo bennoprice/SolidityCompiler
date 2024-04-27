@@ -207,4 +207,11 @@ public class CgenExprVisitor extends BaseVisitor<Object, CgenEnv> {
         ctx.push();
         return null;
     }
+
+    @Override
+    public Integer visit(BoolConstNode node, CgenEnv ctx) {
+        Cgen.asm.PUSH(4, node.getVal() ? 1 : 0);
+        ctx.push();
+        return null;
+    }
 }

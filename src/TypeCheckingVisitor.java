@@ -207,4 +207,10 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
         node.setType(TreeConstants.uint256);
         return TreeConstants.uint256;
     }
+
+    @Override
+    public Symbol visit(BoolConstNode node, TypeEnv data) {
+        node.setType(TreeConstants.bool);
+        return TreeConstants.bool;
+    }
 }
