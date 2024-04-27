@@ -27,3 +27,10 @@ Packing arguments tightly drastically decreases *calldata* size and lowers costs
    ```
    ./compile "{PROJECT_ROOT_PATH}/examples/HelloWorld.sol"
    ```
+
+This generates two output files in the `./out` directory:
+
+1. **Runtime bytecode** which is deployed smart contract code stored on the blockchain.  
+   This can be executed using online EVM interpreters such as [evmcodes](https://www.evm.codes/playground)
+2. **Creation bytecode** which is the code that deploys the smart contract to the blockchain.  
+   This is sent as transaction data to deploy the smart contract to EVM-compatible networks.
