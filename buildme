@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -x
+set -e
+set -o pipefail
+
+PROJECT_DIR=`pwd`
+BUILD_DIR=$PROJECT_DIR/build
+SRC_DIR=$PROJECT_DIR/src
+
+ANTLR_JAR="$PROJECT_DIR/lib/antlr-4.6-complete.jar"
+BC_JAR="$PROJECT_DIR/lib/bcprov-jdk18on-1.78.1.jar"
+
+CLASSPATH=$ANTLR_JAR:$CLASSPATH
+CLASSPATH=$BC_JAR:$CLASSPATH
+
+JAVA_SRC_FILE_LIST="$SRC_DIR/ast/*.java \
+    $SRC_DIR/ast/visitor/*.java \
+    $SRC_DIR/Assembler.java \
+    $SRC_DIR/ASTBuilder.java \
+    $SRC_DIR/Cgen.java \
+    $SRC_DIR/CgenExprVisitor.java \
+    $SRC_DIR/Frontend.java \
+    $SRC_DIR/Program.java \
+    $SRC_DIR/Semant.java \
+    $SRC_DIR/StringTable.java \
+    $SRC_DIR/TreeConstants.java \
+    $SRC_DIR/TypeCheckingVisitor.java \
+    $SRC_DIR/Utilities.java"
+
+ANTLR="java -jar $ANTLR_JAR"
+
+$ANTLR -o $BUILD_DIR -listener -visitor -lib $SRC_DIR $SRC_DIR/SolidityParser.g4 $SRC_DIR/SolidityLexer.g4
+
+javac -cp $CLASSPATH -d $BUILD_DIR/ $JAVA_SRC_FILE_LIST $BUILD_DIR/*.java 2>&1
+
+echo "java -cp .:$CLASSPATH Program \$@" > $BUILD_DIR/compile
+chmod +x $BUILD_DIR/compile
+
+set +o pipefail
+set +e
+set +x
