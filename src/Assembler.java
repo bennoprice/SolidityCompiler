@@ -15,6 +15,8 @@ class OpCode {
     public static int REVERT = 0xfd;
     public static int CALLDATASIZE = 0x36;
     public static int CALLDATALOAD = 0x35;
+    public static int CODECOPY = 0x39;
+    public static int RETURN = 0xf3;
     public static int SLOAD = 0x54;
     public static int SSTORE = 0x55;
     public static int JUMP = 0x56;
@@ -170,6 +172,14 @@ public class Assembler {
 
     public Assembler CALLDATALOAD() {
         return OP(OpCode.CALLDATALOAD);
+    }
+
+    public Assembler CODECOPY() {
+        return OP(OpCode.CODECOPY);
+    }
+
+    public Assembler RETURN() {
+        return OP(OpCode.RETURN);
     }
 
     public Assembler SLOAD() {

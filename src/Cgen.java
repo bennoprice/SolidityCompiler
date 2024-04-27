@@ -13,7 +13,7 @@ public class Cgen {
     public static HashMap<Symbol, MethodNode> methods;
     public static ArrayList<Symbol> attributes;
 
-    public static void emit(ProgramNode program) {
+    public static String emit(ProgramNode program) {
         asm = new Assembler();
         contract = program.getContract();
         methodLabels = new HashMap<>();
@@ -21,7 +21,8 @@ public class Cgen {
         populateFeatures();
         emitDispatch();
         emitMethods();
-        System.out.println(asm.get());
+
+        return asm.get();
     }
 
     private static void populateFeatures() {

@@ -19,6 +19,7 @@ JAVA_SRC_FILE_LIST="$SRC_DIR/ast/*.java \
     $SRC_DIR/Assembler.java \
     $SRC_DIR/ASTBuilder.java \
     $SRC_DIR/Cgen.java \
+    $SRC_DIR/CgenCreation.java \
     $SRC_DIR/CgenExprVisitor.java \
     $SRC_DIR/Frontend.java \
     $SRC_DIR/Program.java \
