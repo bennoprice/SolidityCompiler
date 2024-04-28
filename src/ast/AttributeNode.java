@@ -9,6 +9,7 @@ public class AttributeNode extends FeatureNode {
     public Symbol getName() {
         return name;
     }
+
     public Symbol getType_decl() {
         return type_decl;
     }
@@ -18,6 +19,7 @@ public class AttributeNode extends FeatureNode {
         this.name = name;
         this.type_decl = type;
     }
+
     public <R,D> R accept(TreeVisitor<R,D> visitor, D data) {
         return visitor.visit(this, data);
     }

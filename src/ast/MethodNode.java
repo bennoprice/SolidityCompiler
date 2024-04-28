@@ -14,18 +14,23 @@ public class MethodNode  extends FeatureNode {
     public Symbol getName() {
         return name;
     }
+
     public List<FormalNode> getFormals() {
         return formals;
     }
+
     public boolean isPublic() {
         return public_;
     }
+
     public Symbol getReturn_type() {
         return return_type;
     }
+
     public List<ExpressionNode> getExprs() {
         return exprs;
     }
+
 
     public MethodNode(int lineNumber, Symbol name, List<FormalNode> formals, boolean public_, Symbol return_type, List<ExpressionNode> exprs) {
         super(lineNumber);

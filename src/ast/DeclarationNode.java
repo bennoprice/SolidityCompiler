@@ -5,6 +5,7 @@ import ast.visitor.TreeVisitor;
 public class DeclarationNode extends ExpressionNode {
     protected Symbol name;
     protected Symbol type_decl;
+    protected ExpressionNode expr;
 
     public Symbol getName() {
         return name;
@@ -17,8 +18,6 @@ public class DeclarationNode extends ExpressionNode {
     public ExpressionNode getExpr() {
         return expr;
     }
-
-    protected ExpressionNode expr;
 
     public DeclarationNode(int lineNumber, Symbol name, Symbol type, ExpressionNode expr) {
         super(lineNumber);

@@ -3,7 +3,6 @@ package ast;
 import ast.visitor.TreeVisitor;
 
 public class NoExpressionNode extends ExpressionNode {
-
     public NoExpressionNode(int lineNumber) {
         super(0);
     }

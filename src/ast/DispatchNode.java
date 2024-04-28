@@ -11,6 +11,7 @@ public class DispatchNode extends ExpressionNode {
     public Symbol getName() {
         return name;
     }
+
     public List<ExpressionNode> getActuals() {
         return actuals;
     }

@@ -227,7 +227,7 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
 
     @Override
     public Symbol visit(IntConstNode node, TypeEnv ctx) {
-        // need to determine type based on size
+        // should determine type based on size
         node.setType(TreeConstants.uint256);
         return TreeConstants.uint256;
     }

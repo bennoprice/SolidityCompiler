@@ -3,11 +3,11 @@ package ast;
 import ast.visitor.TreeVisitor;
 
 public class ObjectNode extends ExpressionNode {
+    protected Symbol name;
+
     public Symbol getName() {
         return name;
     }
-
-    protected Symbol name;
 
     public ObjectNode(int lineNumber, Symbol name) {
         super(lineNumber);

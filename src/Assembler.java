@@ -26,7 +26,6 @@ class OpCode {
     public static int LT = 0x10;
     public static int GT = 0x11;
     public static int EQ = 0x14;
-
 }
 
 class LabelReference {

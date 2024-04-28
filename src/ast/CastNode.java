@@ -9,6 +9,7 @@ public class CastNode extends ExpressionNode {
     public Symbol getType_decl() {
         return type_decl;
     }
+
     public ExpressionNode getExpr() {
         return expr;
     }

@@ -16,6 +16,7 @@ public abstract class ExpressionNode extends TreeNode {
     protected ExpressionNode(int lineNumber) {
         super(lineNumber);
     }
+
     public <R,D> R accept(TreeVisitor<R,D> visitor, D data) {
         return visitor.visit(this, data);
     }

@@ -4,6 +4,7 @@ import ast.visitor.TreeVisitor;
 
 public class FormalNode extends TreeNode {
     protected Symbol name;
+    protected Symbol type_decl;
 
     public Symbol getName() {
         return name;
@@ -12,8 +13,6 @@ public class FormalNode extends TreeNode {
     public Symbol getType_decl() {
         return type_decl;
     }
-
-    protected Symbol type_decl;
 
     public FormalNode(int lineNumber, Symbol name, Symbol type) {
         super(lineNumber);

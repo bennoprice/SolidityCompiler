@@ -15,7 +15,6 @@ public class Frontend {
 
             var tree = parser.program();
 
-            // why not earlier?
             if (Utilities.errors())
                 Utilities.fatalError(Utilities.ErrorCode.LEXER_PARSER);
 

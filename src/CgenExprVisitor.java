@@ -143,7 +143,6 @@ public class CgenExprVisitor extends BaseVisitor<Object, CgenEnv> {
     public Object visit(ReturnNode node, CgenEnv ctx) {
         visit(node.getExpr(), ctx);
         ctx.storeReturn();
-
         return null;
     }
 
@@ -222,7 +221,6 @@ public class CgenExprVisitor extends BaseVisitor<Object, CgenEnv> {
     public Object visit(NegNode node, CgenEnv ctx) {
         visit(node.getE1(), ctx);
         Cgen.asm.ISZERO();
-
         return null;
     }
 
