@@ -15,7 +15,7 @@ Packing arguments tightly drastically decreases *calldata* size and lowers costs
    ```
    cd ...
    ```
-2. Build the project
+2. Build the compiler
    ```
    ./buildme
    ```
@@ -23,7 +23,7 @@ Packing arguments tightly drastically decreases *calldata* size and lowers costs
    ```
    cd ./build
    ```
-4. Run the compiler passing source code path as first command-line argument
+4. Run the compiler, passing source code path as first command-line argument
    ```
    ./compile "{PROJECT_ROOT_PATH}/examples/hello_world.sol"
    ```
