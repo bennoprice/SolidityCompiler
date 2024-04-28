@@ -48,20 +48,15 @@ accessibility
     | PUBLIC PACKED
     ;
 
-// ternary or branch
-// return (specify return type, single value)
-// add packed keyword (don't enforce but error)
-// local declaration
-
 expr
     : objectId=IDENTIFIER PARENT_OPEN args? PARENT_CLOSE            # Dispatch
     | expr op=(MULT_OPERATOR | DIV_OPERATOR) expr                   # MultiplyDivide
     | expr op=(PLUS_OPERATOR | MINUS_OPERATOR) expr                 # AddSubtract
-    | expr op=(LESS_EQ_OPERATOR | LESS_OPERATOR | EQ_OPERATOR) expr # LessEqual // does this go here?
+    | expr op=(LESS_EQ_OPERATOR | LESS_OPERATOR | EQ_OPERATOR) expr # LessEqual
     | NOT_OPERATOR expr                                             # Negate
     | expr QUESTION expr COLON expr                                 # Ternary
-    | objectId=IDENTIFIER EQ_OPERATOR expr                          # Assignment
-    | typeId=IDENTIFIER objectId=IDENTIFIER EQ_OPERATOR expr        # Declaration
+    | objectId=IDENTIFIER ASSIGN_OPERATOR expr                      # Assignment
+    | typeId=IDENTIFIER objectId=IDENTIFIER ASSIGN_OPERATOR expr    # Declaration
     | PARENT_OPEN expr PARENT_CLOSE                                 # Brackets
     | RETURN expr                                                   # Return
     | objectId=IDENTIFIER                                           # ID

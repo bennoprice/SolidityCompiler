@@ -22,7 +22,8 @@ DIV_OPERATOR    : '/';
 
 LESS_OPERATOR       : '<';
 LESS_EQ_OPERATOR    : '<=';
-EQ_OPERATOR         : '=' ;
+EQ_OPERATOR         : '==' ;
+ASSIGN_OPERATOR     : '=' ;
 NOT_OPERATOR        : '!';
 
 /* Directives */
