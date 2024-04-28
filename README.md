@@ -25,7 +25,7 @@ Packing arguments tightly drastically decreases *calldata* size and lowers costs
    ```
 4. Run the compiler passing source code path as first command-line argument
    ```
-   ./compile "{PROJECT_ROOT_PATH}/examples/HelloWorld.sol"
+   ./compile "{PROJECT_ROOT_PATH}/examples/hello_world.sol"
    ```
 
 This generates two output files in the `./out` directory:
