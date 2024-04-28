@@ -101,6 +101,10 @@ public class Cgen {
             var size = switch (formal.getType_decl().toString()) {
                 case "bool" -> 1;
                 case "uint8" -> 1;
+                case "uint16" -> 2;
+                case "uint32" -> 4;
+                case "uint64" -> 8;
+                case "uint128" -> 16;
                 case "uint256" -> 32;
                 default -> 0;
             };

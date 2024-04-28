@@ -201,6 +201,32 @@ public class CgenExprVisitor extends BaseVisitor<Object, CgenEnv> {
     }
 
     @Override
+    public Object visit(BoolBinopNode node, CgenEnv ctx) {
+        visit(node.getE2(), ctx);
+        visit(node.getE1(), ctx);
+
+        if (node instanceof EqNode)
+            Cgen.asm.EQ();
+        else if (node instanceof LEqNode) {
+            Cgen.asm.GT();
+            Cgen.asm.ISZERO();
+        }
+        else /* if (node instanceof LTNode) */
+            Cgen.asm.LT();
+
+        ctx.pop();
+        return null;
+    }
+
+    @Override
+    public Object visit(NegNode node, CgenEnv ctx) {
+        visit(node.getE1(), ctx);
+        Cgen.asm.ISZERO();
+
+        return null;
+    }
+
+    @Override
     public Integer visit(IntConstNode node, CgenEnv ctx) {
         var val = Integer.parseInt(node.getVal().toString());
         Cgen.asm.PUSH(4, val);

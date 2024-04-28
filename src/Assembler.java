@@ -24,7 +24,9 @@ class OpCode {
     public static int JUMPDEST = 0x5B;
     public static int ISZERO = 0x15;
     public static int LT = 0x10;
+    public static int GT = 0x11;
     public static int EQ = 0x14;
+
 }
 
 class LabelReference {
@@ -160,6 +162,10 @@ public class Assembler {
 
     public Assembler LT() {
         return OP(OpCode.LT);
+    }
+
+    public Assembler GT() {
+        return OP(OpCode.GT);
     }
 
     public Assembler EQ() {

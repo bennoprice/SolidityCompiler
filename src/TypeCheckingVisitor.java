@@ -40,7 +40,7 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
     @Override
     public Symbol visit(AttributeNode node, TypeEnv ctx) {
         var type = node.getType_decl();
-        if (!Semant.primitives.contains(type))
+        if (!TreeConstants.isPrimitive(type))
             return errorUndefined(type, node);
         return type;
     }
@@ -54,7 +54,7 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
             var name = formal.getName();
             var type = formal.getType_decl();
 
-            if (!Semant.primitives.contains(type))
+            if (!TreeConstants.isPrimitive(type))
                 return error("Formal parameter " + arg + " undefined symbol '" + type + "'", node);
 
             if (ctx.getVariables().probe(name) != null)
@@ -69,7 +69,7 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
             visit(expr, innerScope);
 
         var returnType = node.getReturn_type();
-        if (!Semant.primitives.contains(returnType))
+        if (!TreeConstants.isPrimitive(returnType))
             return error("Undefined return type '" + returnType + "'", node);
         return returnType;
     }
@@ -91,7 +91,7 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
     @Override
     public Symbol visit(DeclarationNode node, TypeEnv ctx) {
         var lhs = node.getType_decl();
-        if (!Semant.primitives.contains(lhs))
+        if (!TreeConstants.isPrimitive(lhs))
             return errorUndefined(lhs, node);
 
         var name = node.getName();
@@ -189,6 +189,30 @@ public class TypeCheckingVisitor extends BaseVisitor<Symbol, TypeEnv> {
 
         node.setType(TreeConstants.uint256);
         return TreeConstants.uint256;
+    }
+
+    @Override
+    public Symbol visit(BoolBinopNode node, TypeEnv ctx) {
+        var lhs = visit(node.getE1(), ctx);
+        if (!TreeConstants.isInteger(lhs))
+            return error("LHS of expression must be integer", node);
+
+        var rhs = visit(node.getE2(), ctx);
+        if (!TreeConstants.isInteger(rhs))
+            return error("RHS of expression must be integer", node);
+
+        node.setType(TreeConstants.bool);
+        return TreeConstants.bool;
+    }
+
+    @Override
+    public Symbol visit(NegNode node, TypeEnv ctx) {
+        var type = visit(node.getE1(), ctx);
+        if (type != TreeConstants.bool)
+            return errorTypeMismatch(TreeConstants.bool, type, node);
+
+        node.setType(TreeConstants.bool);
+        return TreeConstants.bool;
     }
 
     @Override

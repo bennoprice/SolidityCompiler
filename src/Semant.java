@@ -46,26 +46,15 @@ class SymbolNode<D> {
 
 public class Semant {
     public static ContractNode contract;
-    public static List<Symbol> primitives;
     public static SymbolNode<Symbol> attributes;
     public static HashMap<Symbol, MethodNode> methods;
 
     public static void analyze(ProgramNode program) {
         contract = program.getContract();
-
-        populatePrimitives();
         populateFeatures();
 
         var typeCheckVisitor = new TypeCheckingVisitor();
         program.accept(typeCheckVisitor, null);
-    }
-
-    private static void populatePrimitives() {
-        primitives = new ArrayList<>();
-        primitives.add(TreeConstants.uint256);
-        primitives.add(TreeConstants.uint8);
-        primitives.add(TreeConstants.bool);
-        primitives.add(TreeConstants.void_);
     }
 
     private static void populateFeatures() {

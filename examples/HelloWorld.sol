@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.23;
 
-contract Test {
+contract HelloWorld {
     uint256 private attr;
 
     // accepts many single-byte values and sums them up
