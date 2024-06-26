@@ -3,12 +3,12 @@ This compiler implements a proprietary **Compact ABI-encoding** which packs func
 This optimization is designed with Ethereum Rollups in mind, where calldata size constitutes the majority of the transaction cost.
 Packing arguments tightly drastically decreases *calldata* size and lowers costs for end-users.
 
-> **Note**  
+> [!NOTE]
 > The compiler implements a featherweight Solidity and is not feature complete.
 
 ## Quick Start
 
-> **Warning**  
+> [!WARNING]
 > The compiler has not been audited and should not be used in a production setting.
 
 1. Navigate to project root
