@@ -6,6 +6,11 @@ Packing arguments tightly drastically decreases *calldata* size and lowers costs
 > [!NOTE]
 > The compiler implements a featherweight Solidity and is not feature complete.
 
+## Documentation
+
+This is my final year project for my Bachelor of Science (BSc) in Computer Science at Queen Mary University of London.  
+The detailed report for this project can be found [here](docs/report.pdf).
+
 ## Quick Start
 
 > [!WARNING]
